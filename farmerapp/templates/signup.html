@@ -1,0 +1,105 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <h2 style="margin-top:20px" align="center">Registration Form</h2><hr>
+
+<div class="container-fluid" style="width:80%;margin-top:5%">
+<form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">First Name</label>
+      <input type="text" class="form-control" placeholder="Enter First Name" name="fname" id="fname">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Last Name</label>
+      <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lname">
+    </div>
+  </div>
+    <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">User Name</label>
+      <input type="text" class="form-control" name="uname" placeholder="Enter User Name" id="uname">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" name="pwd" id="pwd">
+    </div>
+  </div>
+        <div class="form-row">
+<div class="form-group col-md-6">
+    <label for="exampleInputEmail1">Email</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" placeholder="Enter Email">
+  </div>
+    <div class="form-group col-md-6">
+        <label for="exampleInputPassword1">Image</label>
+        <input type="file" class="form-control" id="img" name="img" value="choose file">
+    </div>
+        </div>
+        <div class="form-row">
+    <div class="form-group col-md-6">
+    <label for="exampleInputPassword1">City</label>
+    <input type="text" class="form-control" id="city" placeholder="Enter City" name="city">
+  </div>
+  <div class="form-group col-md-6">
+    <label for="exampleInputPassword1">Full Address</label>
+    <input type="text" class="form-control" id="fulladdress" placeholder="Enter Address Detail" name="add">
+  </div>
+        </div>
+    
+
+    <!-- <div class="form-group col-md-6">
+    <label for="exampleInputPassword1">Full Address</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Address Detail" name="add">
+  </div> -->
+
+  <!-- <div class="form-group col-md-6">
+      <label for="exampleInputPassword1">Image</label>
+      <input type="file" class="form-control" id="exampleInputPassword1" name="img" value="choose file">
+  </div>-->
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="type" value="Buyer">
+    <label class="form-check-label" for="inlineRadio1">Buyer</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="type" value="Seller">
+    <label class="form-check-label" for="inlineRadio2">Farmer</label>
+  </div><br><br>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+
+{% if error %}
+<script>
+    var uname=document.getElementById('uname').innerText
+    var fname=document.getElementById('fname').innerText
+    var lname=document.getElementById('lname').innerText
+    var email=document.getElementById('email').innerText
+    var pwd=document.getElementById('pwd').innerText
+    var city=document.getElementById('city').innerText
+    var fulladdress=document.getElementById('fulladdress').innerText
+    var img = document.getElementById('img').value;
+    var emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var passwordFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (uname=='' || lname=='' || fname==''|| pwd=='' || email==''||city==''||fulladdress==''||img=='')
+    {
+      window.alert('Fill all the fields');
+    }
+    if (!emailFormat.test(email)) {
+        window.alert('Please enter a valid email address');
+    } 
+    if (!passwordFormat.test(pwd)) {
+        window.alert('Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one digit, and one special character.');
+    }
+    else {
+      alert('Registered Successfully');
+      window.location = "{% url 'login' %}";
+    }
+</script>
+{% endif %}
+
+{% endblock %}
